@@ -1,7 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const posts = await Astro.glob('../pages/blog/*.{md,mdx}');
+const postModules = import.meta.glob('../pages/blog/*.{md,mdx}');
+const posts = await Promise.all(
+  Object.entries(postModules).map(async ([path, module]) => {
+    const mod = await module();
+    return {
+      ...mod,
+      url: path.replace('../pages', '').replace(/\.(md|mdx)$/, '')
+    };
+  })
+);
 
 function parseDate(dateString) {
   if (!dateString) return new Date(0);

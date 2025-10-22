@@ -212,7 +212,7 @@ $$ F(\emptyset) \neq F(\{\textit{NULL}\}) $$
 
 ### 流程图
 
-![KunDB 子查询去关联化流程图](../assets/images/kundb_subq_decorr.png)
+![KunDB 子查询去关联化流程图](/assets/images/kundb_subq_decorr.png)
 
 
 我们尝试对逻辑计划按照上述6条规则进行去关联化，当遇到无法完成去关联化的场景，返回原始的执行计划。在实现算法时不能修改原始执行计划。

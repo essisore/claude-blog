@@ -37,7 +37,7 @@ REF：
 
 ### 词法分析
 
-![MySQL table 数据结构](../assets/images/mysql-table-ref-st.png)
+![MySQL table 数据结构](/assets/images/mysql-table-ref-st.png)
 
 table_reference
 

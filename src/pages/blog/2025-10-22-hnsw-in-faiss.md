@@ -65,7 +65,7 @@ struct HNSW {
 
 其本质是一个超大数组 neighbors，保存所有向量的邻居信息，如下所示：
 
-![neighbors示例](../assets/images/faiss-hnsw-neighbors.svg)
+![neighbors示例](/assets/images/faiss-hnsw-neighbors.svg)
 
 整个邻居关系图铺平到了一维空间，前若干个元素是向量 0 的邻居，接下来是向量 1 的邻居，依此类推。每个向量的内部存储了具体每个层次的邻居，逻辑是一样的。假设向量 0 最大层次是 Level3，那么它的邻居个数是 5m 个，Level0 占 2m 个，其余层次占 m 个，按层次依次存储。
 
@@ -169,7 +169,7 @@ index.add(nb, xb);
 
 该接口的执行流程大致如下所示：
 
-![HNSW 构建流程图](../assets/images/faiss-hnsw-construction.svg)
+![HNSW 构建流程图](/assets/images/faiss-hnsw-construction.svg)
 
 1. `prepare_level_tab`：计算每个向量的最高层次记为 `pt_level`，对 `heighbors` 数组进行扩容
 2. 初始化锁，faiss 使用细粒度锁，即每个待添加的向量都会分配一把，用户防止并发更新 heighbors 数组
@@ -249,7 +249,7 @@ HNSWStats greedy_update_nearest(
 
 **问题2**：什么时候找不到最优解？
 
-![HNSW Greedy Case](../assets/images/faiss-hnsw-greedy-case.svg)
+![HNSW Greedy Case](/assets/images/faiss-hnsw-greedy-case.svg)
 
 3 是入口，q 是目标，贪心算法会停在 1（因为 1 距离 q 比它所有邻居都近）， 最优解 2 没机会访问。
 
@@ -309,7 +309,7 @@ auto update_with_candidate = [&](const storage_idx_t idx,
 
 从更新候选集的过程中可以看到，当结果集容量未满之前，候选集是结果集的子集，所以也就不会出现终止条件2。“可能找不到最优解”也很好理解，因为某些最优解需要通过候选集里面的邻居访问，但是这些邻居离待插入的向量又比较远，如下所示：
 
-![HNSW Greedy Case](../assets/images/faiss-hnsw-greedy-case2.svg)
+![HNSW Greedy Case](/assets/images/faiss-hnsw-greedy-case2.svg)
 
 由于节点4 离 q 比 6，7 都远，所以最优解节点 2 也就没有机会被访问到了。
 
@@ -340,7 +340,7 @@ auto update_with_candidate = [&](const storage_idx_t idx,
 
 如下图所示：
 
-![HNSW Shrink Case](../assets/images/faiss-hnsw-shrink-case.svg)
+![HNSW Shrink Case](/assets/images/faiss-hnsw-shrink-case.svg)
 
 会按照 v1 -> v2 -> v3 -> v4 的顺序访问：
 1. 对于 v1，结果集为空，v1 加入结果集
@@ -394,7 +394,7 @@ auto update_with_candidate = [&](const storage_idx_t idx,
 
 相似度搜索大致流程如下所示：
 
-![HNSW 相似度搜索流程图](../assets/images/faiss-hnsw-search-flow.svg)
+![HNSW 相似度搜索流程图](/assets/images/faiss-hnsw-search-flow.svg)
 
 对于批量查询，即有多个查询向量时，faiss 内部使用多线程技术，对于每个查询向量调用 `hnsw.search` 函数。`hnsw.search` 的核心逻辑如下所述：
 

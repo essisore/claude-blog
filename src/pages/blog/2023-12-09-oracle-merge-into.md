@@ -20,7 +20,7 @@ merge into 主要分为三个主要分支：主分主，update 分支和 insert 
 
 - 主分支：通过 into 子句指定了 merge 的 **TARGET**，即 merge 操作的目标表，无论后续执行 update 还是 insert，抑或是 delete，都是在 target 上执行的；通过 using 子句指定了 merge 的 **SOURCE**，即 merge 操作的源，源指定了数据的来源，可以是表，视图或者子查询。merge 可以使用 source 返回的数据来更新或者将其插入到 target 中；on 子句指定了匹配条件，后续执行的具体操作由 on 子句指明，如果 on 中表达式返回 true，即匹配，则执行 update 分支，如果返回 false 或者 null，则不匹配，执行 insert 分支。
 
-![main 分支](../assets/images/merge-into-syntax-main.png)
+![main 分支](/assets/images/merge-into-syntax-main.png)
 
 - update 分支：当 on 子句中指定的条件返回 true 时，会执行 update 分支，会根据 set 子句指定的表达式对 target 表进行更新，也可以指定 where 子句，这样只会对 target 中满足 where 条件的行进行更新。
 
@@ -41,7 +41,7 @@ merge into 主要分为三个主要分支：主分主，update 分支和 insert 
         > If a row of the destination table meets the `DELETE` condition but is not included in the join defined by the `ON` clause, then it is not deleted.
         >
 
-![update 分支](../assets/images/merge-into-syntax-update.png)
+![update 分支](/assets/images/merge-into-syntax-update.png)
 
 - insert 分支：当 on 子句返回 false 时，执行 insert 分支。如果 on 子句的条件是 **constant filter predicate**，如 `ON` (`0=1`)，Oracle 会将 merge 转为 insert，避免 join。同样，insert 也可以指定 where 子句，当满足条件时才会插入。
     - insert 可能会导致主键冲突
@@ -61,7 +61,7 @@ merge into 主要分为三个主要分支：主分主，update 分支和 insert 
         when not matched then insert values(t2.a, t2.b);
         ```
 
-![insert 分支](../assets/images/merge-into-syntax-insert.png)
+![insert 分支](/assets/images/merge-into-syntax-insert.png)
 
 
 
@@ -90,7 +90,7 @@ WHEN NOT MATCHED THEN
      INSERT(product_name, product_type, unit_price, modified_date)
      VALUES(src.product_name, src.product_type, src.unit_price, SYSDATE);
 ```
-![merge into示例](../assets/images/merge-into-example.png)
+![merge into示例](/assets/images/merge-into-example.png)
 
 merge 首先会 perform 一个 left join，即 source RIGHT OUTER JOIN target ON match_condtion，并以 left join 的数据为输入，进入 merge 的处理流程。
 

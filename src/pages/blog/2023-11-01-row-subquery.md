@@ -86,7 +86,7 @@ bool PTI_comp_op::do_itemize(Parse_context *pc, Item **res) {
 
 comp_op 是一个二元 operator，所以先递归的对 left 和 right 两个参数进行 itemize，接着调用 create 函数生成相应的 Item。不同的 comp_op 对应不同的 boolfunc2creator，如 ‘=’ 对应 comp_eq_creator，最终会调用 Linear_comp_creator::create，生成 Item_func_eq，其代表的就是等值比较表达式， Item_func_eq 继承 Item_bool_func2，而后者又继承 Item_func， Item_func_eq 继承关系如下图所示（Item 是 MySQL 里面所有表达式的基类）：
 
-![Item_func_comparison 继承关系](../assets/images/item-func-comparison.png)
+![Item_func_comparison 继承关系](/assets/images/item-func-comparison.png)
 
 [Item_func_comparison 继承关系](https://dev.mysql.com/doc/dev/mysql-server/latest/classItem__func__comparison__inherit__graph_org.svg)
 
@@ -147,7 +147,7 @@ set_cmp_func 首先会根据左右参数的 result type 推导出期望的 resul
 
 对于 row subquery 而言，左侧对应的是 `Item_row`， 右侧子查询对应的类是 `Item_singlerow_subselect` 。Item_singlerow_subselect 由 PTI_singlerow_subselect 转换而来，其继承图如下所示：
 
-![Item_subselect 继承关系](../assets/images/item-subselect.png)
+![Item_subselect 继承关系](/assets/images/item-subselect.png)
 
 [Item_subselect 继承关系](https://dev.mysql.com/doc/dev/mysql-server/latest/classItem__subselect.html)
 

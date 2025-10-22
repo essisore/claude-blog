@@ -56,7 +56,7 @@ tags: ["database", "mysql", "query processing"]
 
 查询解析分为两个步骤，如下图阴影方框所示：第一是 contextualize，第二是 prepare。contextualize 完成一些名称解析的准备工作，主要是遍历 ast，建立和维护好名称解析的数据结构；prepare 阶段则是以建立好的 query block 为基础，调用解析函数，完成名称解析。这些内容将在下文中做详细的介绍。
 
-![mysql 代码流程图](../assets/images/mysql-query-arch.png)
+![mysql 代码流程图](/assets/images/mysql-query-arch.png)
 
 下面列出的是部分查询解析相关的错误，通过这些错误，我们也能够从侧面了解名称解析所做的工作是什么。mysql 中的所有错误均可在 [Server Error Message Reference](https://dev.mysql.com/doc/mysql-errors/8.0/en/server-error-reference.html)页面查询到。
 
@@ -98,7 +98,7 @@ tags: ["database", "mysql", "query processing"]
 
     在 mysql 源码中使用 ascii 画出了该条 sql 的 query expression 结构图。我通过调试源码，画了一份更直观的图，如下所示：
 
-    ![QueryExpr 和 QueryBlock](../assets/images/query-expr-and-block.png)
+    ![QueryExpr 和 QueryBlock](/assets/images/query-expr-and-block.png)
 
     - 说明：
         - query expression 和 query block 都拥有 master 和 slave 域，分别指向对方
@@ -165,7 +165,7 @@ mysql parser 在新生成 Item_ident 的时候，会取栈顶的 context 赋值�
 
 mysql 实现了数十个函数，用以做名称解析。这些函数的调用关系如下所示：
 
-![符号解析函数调用链](../assets/images/nr-func-call.png)
+![符号解析函数调用链](/assets/images/nr-func-call.png)
 
 注：时至制作上图时，我对 setup_window1，也就是窗口函数的名称解析部分的代码仍未研究，故上图中的 setup_window1 是孤立的。
 
@@ -180,13 +180,13 @@ fix_fields 是 mysql 名称解析过程中最重要的接口之一，主要用�
     对于 Item_field 来说，总是先在其 context 的 TableList 链表上进行查找，可以简单的理解为从 from 子句中进行查找。找不到的情况下，则去外层 query block 中进行查找。对于某些子句中的 Item_field 来说，在查外层 query block 之前，还可以去 select 子句中的 fields 中上进行查找。代码流程如下图所示：
 
 
-![解析 field 流程图](../assets/images/mysql-fix-fields.png)
+![解析 field 流程图](/assets/images/mysql-fix-fields.png)
 
 - Item_ref
 
     对于 Item_ref 来首，会先从 select 和 group by 子句中查找。没找到的情况下，会迭代到外层 query block 中进行查找。代码流程如下图所示：
 
-    ![解析 ref 流程图](../assets/images/mysql-fix-ref.png)
+    ![解析 ref 流程图](/assets/images/mysql-fix-ref.png)
 
     ### find_order_in_list
 
@@ -194,7 +194,7 @@ fix_fields 是 mysql 名称解析过程中最重要的接口之一，主要用�
 
     具体代码流程如下所示：
 
-    ![Find Order in List 流程图](../assets/images/mysql-order-group.png)
+    ![Find Order in List 流程图](/assets/images/mysql-order-group.png)
 
     ## 结语
 

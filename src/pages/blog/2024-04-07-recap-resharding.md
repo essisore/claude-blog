@@ -20,7 +20,7 @@ vitess 架构不是本文的重点，但为了行文的完整性，本节向读�
 
 此处借用 [vitess.io](https://vitess.io) 上的架构图：
 
-![Vitess Architecture](../assets/images/vitess_architecture.svg)
+![Vitess Architecture](/assets/images/vitess_architecture.svg)
 
 - vtgate：gate 是 vitess 对外提供服务的接口，支持 grpc 协议和 mysql 协议，用户可以像使用
 mysql 一样，使用 mysql 客户端连上 gate，执行 sql
@@ -91,7 +91,7 @@ vitess 需要手动指定每一张表的 shard key，一扩二的之前需要通
 
 下图所示展示的是一扩二的全量同步的过程：
 
-![Copy Data](../assets/images/resharding_copy_data.png)
+![Copy Data](/assets/images/resharding_copy_data.png)
 
 1. 对于每个 source shard：
     - 随机找到其一个 healthy rdonly 副本，使用 `stop slave` 停其流水
@@ -166,7 +166,7 @@ tablet 之间的流水同步也被称作 filtered replication。
 
 下图展示的是增量同步的步骤：
 
-![Filterd Replication](../assets/images/filterd_replication.png)
+![Filterd Replication](/assets/images/filterd_replication.png)
 
 1. dest primary 接收到 RefreshState 后，启动 binlog player
 2. binlog player 从 `blp_checkpoint` 中读取 start pos
@@ -191,7 +191,7 @@ diff 的流程比较简单，我们重点回顾一下 vitess 是如何让两个 
 
 synchronizeReplication 的步骤如下图所示：
 
-![Sync Replication](../assets/images/sync_replication.png)
+![Sync Replication](/assets/images/sync_replication.png)
 
 1. 调用 `StopBlp` 停止 dest primary 上的 binlog player
 
