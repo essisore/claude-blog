@@ -146,7 +146,7 @@ in 子查询和 exists 子查询很类似，但是其对于 null 值的处理是
 select id in (select id from t2) from t1;
 ```
 
-为了支持上述 sql，我们需要为 apply 算子引入 [mark 属性](https://www.notion.so/Apply-Executor-b58058168fe8435287d81139a12140b2?pvs=21)。
+为了支持上述 sql，我们需要为 apply 算子引入 mark 属性。
 
 ### mark 属性
 
@@ -156,7 +156,7 @@ apply 算子包含一个 mark 属性，如果 mark 为 true，不仅需要输出
 
 mark 属性会改变 [anti] semi apply 算子的输出逻辑，原本不输出的 r，现在会输出。
 
-添加 mark 属性后，[Apply 算子的类型](https://www.notion.so/Apply-Executor-b58058168fe8435287d81139a12140b2?pvs=21) 中无法用 semi apply 计算的 exists 和 in 子查询就可以使用 semi apply 来计算。
+添加 mark 属性后，Apply 算子的类型中无法用 semi apply 计算的 exists 和 in 子查询就可以使用 semi apply 来计算。
 
 ## Apply Condition
 
