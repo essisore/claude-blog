@@ -6,7 +6,7 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 
 export default defineConfig({
-  site: 'https://kenleismo.github.io',
+  site: 'https://longfei.space',
   integrations: [
     mdx(),
     sitemap(),
