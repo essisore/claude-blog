@@ -18,21 +18,41 @@ const { title, description = "一个菜鸟的技术笔记" } = Astro.props;
     <!-- KaTeX CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
     <title>{title}</title>
+    <script is:inline>
+      // 防止页面闪烁的暗色模式初始化脚本
+      (function() {
+        const theme = localStorage.getItem('theme') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+      })();
+    </script>
   </head>
-  <body>
-    <header class="border-b border-gray-200 mb-8">
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-200">
+    <header class="border-b border-gray-200 dark:border-gray-700 mb-8">
       <nav class="max-w-4xl mx-auto px-6 py-6">
         <div class="flex justify-between items-center">
-          <a href={import.meta.env.BASE_URL} class="text-xl font-semibold text-gray-900 hover:text-gray-700">
+          <a href={import.meta.env.BASE_URL} class="text-xl font-semibold text-gray-900 dark:text-gray-100 hover:text-gray-700 dark:hover:text-gray-300">
             Tech Notes
           </a>
-          <div class="flex space-x-6">
-            <a href={import.meta.env.BASE_URL} class="text-gray-600 hover:text-gray-900 transition-colors">
+          <div class="flex items-center space-x-6">
+            <a href={import.meta.env.BASE_URL} class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
               博客
             </a>
-            <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/about/`} class="text-gray-600 hover:text-gray-900 transition-colors">
+            <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/about/`} class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
               关于
             </a>
+            <button 
+              id="theme-toggle" 
+              class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              aria-label="切换主题"
+            >
+              <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"></path>
+              </svg>
+              <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+              </svg>
+            </button>
           </div>
         </div>
       </nav>
@@ -42,12 +62,28 @@ const { title, description = "一个菜鸟的技术笔记" } = Astro.props;
       <slot />
     </main>
 
-    <footer class="mt-16 py-8 border-t border-gray-200">
-      <div class="max-w-4xl mx-auto px-6 text-center text-gray-500">
+    <footer class="mt-16 py-8 border-t border-gray-200 dark:border-gray-700">
+      <div class="max-w-4xl mx-auto px-6 text-center text-gray-500 dark:text-gray-400">
         <p>&copy; 2025 Tech Notes.</p>
       </div>
     </footer>
 
+    <script>
+      // 暗色模式切换功能
+      const themeToggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      
+      function updateTheme(theme) {
+        html.classList.toggle('dark', theme === 'dark');
+        localStorage.setItem('theme', theme);
+      }
+      
+      themeToggle?.addEventListener('click', () => {
+        const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        updateTheme(newTheme);
+      });
+    </script>
   </body>
 </html>
 

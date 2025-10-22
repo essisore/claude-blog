@@ -10,22 +10,68 @@
   }
 
   body {
-    @apply bg-white text-gray-900 leading-relaxed;
+    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 leading-relaxed;
   }
 
-  /* 代码块样式 */
+  /* Shiki 双主题代码块样式 */
   pre {
     @apply relative rounded-lg p-4 overflow-x-auto;
+    /* 移除固定背景色，让 Shiki 主题控制 */
+  }
+
+  /* Shiki 双主题支持 - 使用新的 CSS 变量 */
+  .prose pre.astro-code,
+  .blog-content pre.astro-code,
+  pre.astro-code {
+    background-color: var(--shiki-light-bg) !important;
+    color: var(--shiki-light) !important;
+  }
+
+  .prose pre.astro-code code,
+  .blog-content pre.astro-code code,
+  pre.astro-code code {
+    background: transparent !important;
+    color: inherit !important;
+  }
+
+  .prose pre.astro-code span,
+  .blog-content pre.astro-code span,
+  pre.astro-code span {
+    color: var(--shiki-light) !important;
+  }
+
+  html.dark .prose pre.astro-code,
+  html.dark .blog-content pre.astro-code,
+  html.dark pre.astro-code {
+    background-color: var(--shiki-dark-bg) !important;
+    color: var(--shiki-dark) !important;
+  }
+
+  html.dark .prose pre.astro-code span,
+  html.dark .blog-content pre.astro-code span,
+  html.dark pre.astro-code span {
+    color: var(--shiki-dark) !important;
+  }
+
+  /* 为没有 Shiki 主题的代码块提供后备样式 */
+  pre:not(.astro-code) {
+    background: #f6f8fa;
+    color: #24292f;
+  }
+
+  .dark pre:not(.astro-code) {
     background: #0d1117;
+    color: #e6edf3;
   }
 
   pre code {
     @apply font-mono text-sm;
+    /* 移除固定颜色，让 Shiki 控制 */
   }
 
   /* 行内代码样式 */
   :not(pre)>code {
-    @apply bg-gray-100 text-gray-800 px-1.5 py-0.5 rounded text-sm font-mono;
+    @apply bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 px-1.5 py-0.5 rounded text-sm font-mono;
   }
 
   /* 标题样式 */
@@ -35,7 +81,7 @@
   h4,
   h5,
   h6 {
-    @apply font-semibold text-gray-900;
+    @apply font-semibold text-gray-900 dark:text-gray-100;
   }
 
   h1 {
@@ -66,12 +112,12 @@
 
   /* 链接样式 */
   a {
-    @apply text-blue-600 hover:text-blue-800 transition-colors;
+    @apply text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors;
   }
 
   /* 引用样式 */
   blockquote {
-    @apply border-l-4 border-gray-300 pl-4 italic text-gray-700 my-4;
+    @apply border-l-4 border-gray-300 dark:border-gray-600 pl-4 italic text-gray-700 dark:text-gray-300 my-4;
   }
 
   /* 表格样式 - 紧凑设计 */
@@ -95,12 +141,26 @@
     color: #374151;
   }
 
+  .dark table th {
+    background-color: #374151;
+    color: #f9fafb;
+  }
+
   table td {
     background-color: #ffffff;
   }
 
+  .dark table td {
+    background-color: #1f2937;
+    color: #e5e7eb;
+  }
+
   table tr:nth-child(even) td {
     background-color: #f9fafb;
+  }
+
+  .dark table tr:nth-child(even) td {
+    background-color: #374151;
   }
 
   /* 针对博客内容的表格样式 - 紧凑版本 */
@@ -141,11 +201,25 @@
     padding: 0.5rem 0.625rem !important;
   }
 
+  .dark article.prose .blog-content table th,
+  .dark .prose.prose-lg table th,
+  .dark .blog-content table th {
+    background-color: #374151 !important;
+    color: #f9fafb !important;
+  }
+
   article.prose .blog-content table td,
   .prose.prose-lg table td,
   .blog-content table td {
     background-color: #ffffff !important;
     color: #6b7280 !important;
+  }
+
+  .dark article.prose .blog-content table td,
+  .dark .prose.prose-lg table td,
+  .dark .blog-content table td {
+    background-color: #1f2937 !important;
+    color: #e5e7eb !important;
   }
 
   article.prose .blog-content table tbody tr:nth-child(even) td,
@@ -154,10 +228,22 @@
     background-color: #f9fafb !important;
   }
 
+  .dark article.prose .blog-content table tbody tr:nth-child(even) td,
+  .dark .prose.prose-lg table tbody tr:nth-child(even) td,
+  .dark .blog-content table tbody tr:nth-child(even) td {
+    background-color: #374151 !important;
+  }
+
   article.prose .blog-content table tbody tr:hover td,
   .prose.prose-lg table tbody tr:hover td,
   .blog-content table tbody tr:hover td {
     background-color: #f0f9ff !important;
+  }
+
+  .dark article.prose .blog-content table tbody tr:hover td,
+  .dark .prose.prose-lg table tbody tr:hover td,
+  .dark .blog-content table tbody tr:hover td {
+    background-color: #1e3a8a !important;
   }
 
   /* 针对prose容器内的表格 */
@@ -183,12 +269,26 @@
     font-size: 0.8rem !important;
   }
 
+  .dark .prose table th {
+    background-color: #374151 !important;
+    color: #f9fafb !important;
+  }
+
   .prose table td {
     background-color: #ffffff !important;
   }
 
+  .dark .prose table td {
+    background-color: #1f2937 !important;
+    color: #e5e7eb !important;
+  }
+
   .prose table tr:nth-child(even) td {
     background-color: #f9fafb !important;
+  }
+
+  .dark .prose table tr:nth-child(even) td {
+    background-color: #374151 !important;
   }
 }
 

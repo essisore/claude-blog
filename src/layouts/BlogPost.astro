@@ -50,8 +50,8 @@ const formattedDate = formatDate(publishDate);
 <BaseLayout title={title} description={description}>
   <article class="prose prose-lg max-w-none">
     <header class="mb-8">
-      <h1 class="text-4xl font-bold text-gray-900 mb-4">{title}</h1>
-      <div class="flex items-center text-gray-600 mb-4">
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">{title}</h1>
+      <div class="flex items-center text-gray-600 dark:text-gray-400 mb-4">
         <time datetime={publishDate}>{formattedDate}</time>
       </div>
     </header>
@@ -92,17 +92,35 @@ const formattedDate = formatDate(publishDate);
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
   }
 
+  .dark .blog-content :global(table th) {
+    background: linear-gradient(135deg, #1e40af, #1d4ed8) !important;
+  }
+
   .blog-content :global(table td) {
     background-color: #f8fafc !important;
     color: #1e293b !important;
+  }
+
+  .dark .blog-content :global(table td) {
+    background-color: #1f2937 !important;
+    color: #e5e7eb !important;
   }
 
   .blog-content :global(table tbody tr:nth-child(even) td) {
     background-color: #e0f2fe !important;
   }
 
+  .dark .blog-content :global(table tbody tr:nth-child(even) td) {
+    background-color: #374151 !important;
+  }
+
   .blog-content :global(table tbody tr:hover td) {
     background-color: #bae6fd !important;
+    transition: background-color 0.2s ease !important;
+  }
+
+  .dark .blog-content :global(table tbody tr:hover td) {
+    background-color: #1e3a8a !important;
     transition: background-color 0.2s ease !important;
   }
 
