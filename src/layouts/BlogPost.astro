@@ -102,4 +102,26 @@ const formattedDate = formatDate(publishDate);
   .blog-content :global(table tbody tr:hover td) {
     background-color: #f0f9ff !important;
   }
+
+  /* 图片样式 - 控制宽度和高度 */
+  .blog-content :global(img) {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 70vh !important;
+    object-fit: contain !important;
+    margin: 1rem auto !important;
+    display: block !important;
+    border-radius: 0.375rem !important;
+  }
+
+  /* 针对prose容器内的图片 */
+  .prose :global(img) {
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 70vh !important;
+    object-fit: contain !important;
+    margin: 1rem auto !important;
+    display: block !important;
+    border-radius: 0.375rem !important;
+  }
 </style>
