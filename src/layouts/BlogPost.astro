@@ -65,8 +65,9 @@ const formattedDate = formatDate(publishDate);
 <style>
   /* 紧凑表格样式 */
   .blog-content :global(table) {
-    width: 100% !important;
-    margin: 1.25rem 0 !important;
+    max-width: 90% !important;
+    width: auto !important;
+    margin: 1.25rem auto !important;
     border-collapse: collapse !important;
     font-size: 0.85rem !important;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
@@ -84,23 +85,25 @@ const formattedDate = formatDate(publishDate);
   }
 
   .blog-content :global(table th) {
-    background-color: #f3f4f6 !important;
+    background: linear-gradient(135deg, #0ea5e9, #0284c7) !important;
     font-weight: 600 !important;
-    color: #374151 !important;
+    color: #ffffff !important;
     font-size: 0.8rem !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
   }
 
   .blog-content :global(table td) {
-    background-color: #ffffff !important;
-    color: #6b7280 !important;
+    background-color: #f8fafc !important;
+    color: #1e293b !important;
   }
 
   .blog-content :global(table tbody tr:nth-child(even) td) {
-    background-color: #f9fafb !important;
+    background-color: #e0f2fe !important;
   }
 
   .blog-content :global(table tbody tr:hover td) {
-    background-color: #f0f9ff !important;
+    background-color: #bae6fd !important;
+    transition: background-color 0.2s ease !important;
   }
 
   /* 图片样式 - 控制宽度和高度 */
