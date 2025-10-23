@@ -21,7 +21,7 @@ const { title, description = "一个菜鸟的技术笔记" } = Astro.props;
     <script is:inline>
       // 防止页面闪烁的暗色模式初始化脚本
       (function() {
-        const theme = localStorage.getItem('theme') || 
+        const theme = localStorage.getItem('theme') ||
           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.classList.toggle('dark', theme === 'dark');
       })();
@@ -41,8 +41,8 @@ const { title, description = "一个菜鸟的技术笔记" } = Astro.props;
             <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/about/`} class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
               关于
             </a>
-            <button 
-              id="theme-toggle" 
+            <button
+              id="theme-toggle"
               class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               aria-label="切换主题"
             >
@@ -72,12 +72,12 @@ const { title, description = "一个菜鸟的技术笔记" } = Astro.props;
       // 暗色模式切换功能
       const themeToggle = document.getElementById('theme-toggle');
       const html = document.documentElement;
-      
+
       function updateTheme(theme) {
         html.classList.toggle('dark', theme === 'dark');
         localStorage.setItem('theme', theme);
       }
-      
+
       themeToggle?.addEventListener('click', () => {
         const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';

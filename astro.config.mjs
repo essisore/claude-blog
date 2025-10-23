@@ -22,7 +22,7 @@ export default defineConfig({
         light: 'catppuccin-latte',
         dark: 'catppuccin-mocha',
       },
-      defaultColor: false,
+      defaultColor: 'dark',
       wrap: true,
     },
     gfm: true,
